@@ -1,0 +1,1 @@
+# android_device_THL400-cm-13.0
