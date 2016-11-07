@@ -18,7 +18,14 @@ on init
     # change lk_env permission
     chown root system /proc/lk_env
     chmod 0660 /proc/lk_env
-
+    
+    # GPS
+    chown gps gps /sys/class/gpsdrv/gps/pwrctl
+    chown gps gps /sys/class/gpsdrv/gps/suspend
+    chown gps gps /sys/class/gpsdrv/gps/state
+    chown gps gps /sys/class/gpsdrv/gps/pwrsave
+    chown gps gps /sys/class/gpsdrv/gps/status
+    
 # mount different fs start
 
 on fs
@@ -146,8 +153,9 @@ on post-fs-data
     start adbd
 
 # GPS
+    mkdir /data/agps_supl 0771 gps system
     mkdir /data/gps_mnl 0771 gps system
-    mkdir /data/misc/gps 0770 gps system
+    mkdir /data/misc/gps 0770 gps gps
 # -----------------------
 # Add by MTK
 
@@ -409,21 +417,18 @@ on post-fs-data
     # DISP
     chmod 0440 /dev/mtk_disp
 
-    #Camera
+ #Camera
     chmod 0660 /dev/camera-sysram
     chmod 0660 /dev/camera-isp
     chmod 0660 /dev/camera-pipemgr
     chmod 0660 /dev/kd_camera_hw
     chmod 0660 /dev/kd_camera_flashlight
     chmod 0660 /dev/kd_camera_hw_bus2
-    chmod 0660 /dev/FM50AF    
-    chmod 0660 /dev/DW9714AF
-    chmod 0660 /dev/DW9718AF    
-    chmod 0660 /dev/GAF001AF
-    chmod 0660 /dev/GAF002AF
-    chmod 0660 /dev/GAF008AF
+    chmod 0660 /dev/FM50AF
+    chmod 0660 /dev/OV5647AF
+    chmod 0660 /dev/GC5004AF
+    chmod 0660 /dev/OV8825AF
     chmod 0660 /dev/CAM_CAL_DRV
-    chmod 0660 /dev/EEPROM_M24C08F
 
     chown system camera /dev/camera-sysram
     chown system camera /dev/camera-isp
@@ -431,14 +436,11 @@ on post-fs-data
     chown system camera /dev/kd_camera_hw
     chown system camera /dev/kd_camera_flashlight
     chown system camera /dev/kd_camera_hw_bus2
-    chown system camera /dev/FM50AF    
-    chown system camera /dev/DW9714AF
-    chown system camera /dev/DW9718AF    
-    chown system camera /dev/GAF001AF
-    chown system camera /dev/GAF002AF
-    chown system camera /dev/GAF008AF
+    chown system camera /dev/FM50AF
+    chown system camera /dev/OV5647AF
+    chown system camera /dev/GC5004AF
+    chown system camera /dev/OV8825AF
     chown system camera /dev/CAM_CAL_DRV
-    chown system camera /dev/EEPROM_M24C08F
 
     #MATV
     chmod 0660 /dev/MATV
