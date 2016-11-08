@@ -18,6 +18,7 @@
 /dev/seccfg               0660   root       system
 /dev/pro_info             0660	 root	    system
 /dev/otp 		  0660	 root	    nvram
+/dev/block/mmcblk0p1	0640	 root	    system
 /dev/nvram 		   0660	 root	    system
 /dev/misc		   0660	 root	    system
 /dev/block/mmcblk0	   0660	 root	    system
