@@ -91,13 +91,6 @@ on post-fs
     exec /system/bin/mknod /dev/stpgps c 191 0
     
     exec /system/bin/mknod /dev/stpbt  c 192 0
-
-    # GPS
-    chmod 0666 /dev/gps
-    chown system gps /dev/gps
-    chmod 0660 /dev/stpgps
-    chown gps gps /dev/stpgps
-
     chmod 0660 /dev/stpbt
     chown bluetooth radio /dev/stpbt
 
@@ -205,7 +198,7 @@ on post-fs-data
 # GPS
     mkdir /data/agps_supl 0771 gps system
     mkdir /data/gps_mnl 0771 gps system
-    mkdir /data/misc/gps 0770 gps gps
+    mkdir /data/misc/gps 0770 gps system
 # -----------------------
 # Add by MTK
 
@@ -468,8 +461,7 @@ on post-fs-data
     chmod 0440 /dev/mtk_disp
     chown system system /dev/mtk_disp
 
-
- #Camera
+    #Camera
     chmod 0660 /dev/camera-sysram
     chmod 0660 /dev/camera-isp
     chmod 0660 /dev/camera-pipemgr
@@ -481,6 +473,7 @@ on post-fs-data
     chmod 0660 /dev/GC5004AF
     chmod 0660 /dev/OV8825AF
     chmod 0660 /dev/CAM_CAL_DRV
+    chmod 0660 /dev/EEPROM_M24C08F
 
     chown system camera /dev/camera-sysram
     chown system camera /dev/camera-isp
@@ -493,6 +486,7 @@ on post-fs-data
     chown system camera /dev/GC5004AF
     chown system camera /dev/OV8825AF
     chown system camera /dev/CAM_CAL_DRV
+    chown system camera /dev/EEPROM_M24C08F
 
     #MATV
     chmod 0660 /dev/MATV
@@ -971,7 +965,16 @@ service geomagneticd /system/bin/geomagneticd
     disabled
     user system
     group system input
+service bmc156d /system/bin/bmc156d
+    disabled
     class main
+    user system
+    group system input
+service lsm303md /system/bin/lsm303md
+    disabled
+    class main
+    user system
+    group system input
 #
 #sensor service (end)
 #
